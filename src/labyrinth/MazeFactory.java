@@ -12,4 +12,8 @@ public class MazeFactory {
     public static Room makeRoom() {
         return new Room();
     }
+
+    public static MazePainter makePainter(Room room) {
+        return new MazePainter(room);
+    }
 }

@@ -3,13 +3,15 @@ package labyrinth;
 import java.util.Random;
 
 public class Maze<T extends MazeFactory> {
-    private static int[] x = {0, 0, 1, -1};
-    private static int[] y = {1, -1, 0, 0};
-    private static Direction[] d = {Direction.EAST, Direction.WEST, Direction.SOUTH, Direction.NORTH};
-    private static Direction[] od = {Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH};
+    protected static int[] x = {0, 0, 1, -1};
+    protected static int[] y = {1, -1, 0, 0};
+    protected static Direction[] d = {Direction.EAST, Direction.WEST, Direction.SOUTH, Direction.NORTH};
+    protected static Direction[] od = {Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH};
+    
+    protected Room[][] rooms;
 
     public Maze() {
-        Room[][] rooms = new Room[4][4];
+        rooms = new Room[4][4];
         for(int i = 0; i < 4; ++i) {
             for(int j = 0; j < 4; ++j) {
                 rooms[i][j] = T.makeRoom();
