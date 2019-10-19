@@ -1,11 +1,12 @@
 package labyrinth;
 
-public class Maze<T extends MazeFactory> {
-    private Room room;
+import java.util.Random;
 
+public class Maze<T extends MazeFactory> {
     private static int[] x = {0, 0, 1, -1};
     private static int[] y = {1, -1, 0, 0};
     private static Direction[] d = {Direction.EAST, Direction.WEST, Direction.SOUTH, Direction.NORTH};
+    private static Direction[] od = {Direction.WEST, Direction.EAST, Direction.NORTH, Direction.SOUTH};
 
     public Maze() {
         Room[][] rooms = new Room[4][4];
@@ -14,6 +15,7 @@ public class Maze<T extends MazeFactory> {
                 rooms[i][j] = T.makeRoom();
             }
         }
+        Random random = new Random();
         for(int i = 0; i < 4; ++i) {
             for(int j = 0; j < 4; ++j) {
                 for(int k = 0; k < 4; ++k) {
@@ -23,15 +25,18 @@ public class Maze<T extends MazeFactory> {
                         rooms[i][j].setSide(d[k], T.makeWall());
                         continue;
                     }
-                    Door door = T.makeDoor(rooms[i][j], rooms[ii][jj]);
-                    rooms[i][j].setSide(d[k], door);
+                    MapSite other = rooms[ii][jj].getSide(od[k]);
+                    if (other == null) {
+                        if (random.nextBoolean()) {
+                            rooms[i][j].setSide(d[k], T.makeDoor(rooms[i][j], rooms[ii][jj]));
+                        } else {
+                            rooms[i][j].setSide(d[k], T.makeWall());
+                        }
+                    } else {
+                        rooms[i][j].setSide(d[k], other);
+                    }
                 }
             }
         }
-        room = rooms[0][0];
-    }
-
-    public Room getRoom() {
-        return room;
     }
 }

@@ -1,7 +1,10 @@
 package labyrinth;
 
+import java.util.HashMap;
+
 public class Room implements MapSite {
     private static int ID_INC = 0;
+    public final static HashMap<Integer, Room> rooms = new HashMap<>();
 
     private int id;
     private MapSite[] sides;
@@ -9,6 +12,7 @@ public class Room implements MapSite {
     {
         id = ID_INC++;
         sides = new MapSite[4];
+        rooms.put(id, this);
     }
 
     public static int getIdInc() {

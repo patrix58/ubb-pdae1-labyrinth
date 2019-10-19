@@ -11,8 +11,8 @@ public class Controller implements KeyListener {
     private GuiPanel currentElement;
     private GuiPanel[] guiElements;
 
-    public Controller(Room currentRoom) {
-        this.currentRoom = currentRoom;
+    {
+        this.currentRoom = Room.rooms.get(0);
         this.guiElements = new GuiPanel[Room.getIdInc()];
         for(int i = 0; i < guiElements.length; ++i) {
             guiElements[i] = new GuiPanel();
