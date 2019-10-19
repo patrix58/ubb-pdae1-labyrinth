@@ -5,15 +5,10 @@ public class Room implements MapSite {
 
     private int id;
     private MapSite[] sides;
-    private Direction direction;
 
     {
-        id = ++ID_INC;
+        id = ID_INC++;
         sides = new MapSite[4];
-    }
-
-    public void setDirection(Direction direction) {
-        this.direction = direction;
     }
 
     public static int getIdInc() {
@@ -26,7 +21,7 @@ public class Room implements MapSite {
 
     @Override
     public void enter() {
-        getSide(direction).enter();
+        System.out.println("Entered room with id = " + id);
     }
 
     public MapSite getSide(Direction direction) {

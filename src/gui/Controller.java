@@ -1,9 +1,6 @@
 package gui;
 
-import labyrinth.CannotException;
-import labyrinth.Direction;
-import labyrinth.MapSite;
-import labyrinth.Room;
+import labyrinth.*;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -52,11 +49,15 @@ public class Controller implements KeyListener {
         } else return;
 
         try {
-            currentRoom.setDirection(direction);
-            currentRoom.enter();
-            currentRoom = (Room) currentRoom.getSide(direction);
+            MapSite side = currentRoom.getSide(direction);
+            if(side instanceof Door) {
+                ((Door) side).setFromRoom(currentRoom);
+            }
+            side.enter();
+            currentRoom = ((Door) side).getOtherRoom();
             currentElement.exit();
             currentElement = guiElements[currentRoom.getId()];
+            currentElement.enter();
         } catch (CannotException ex) {
             mainGui.displayError(ex.getMessage());
         }

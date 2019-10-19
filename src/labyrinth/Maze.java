@@ -1,7 +1,7 @@
 package labyrinth;
 
 public class Maze<T extends MazeFactory> {
-    Room room;
+    private Room room;
 
     private static int[] x = {0, 0, 1, -1};
     private static int[] y = {1, -1, 0, 0};
@@ -12,6 +12,10 @@ public class Maze<T extends MazeFactory> {
         for(int i = 0; i < 4; ++i) {
             for(int j = 0; j < 4; ++j) {
                 rooms[i][j] = T.makeRoom();
+            }
+        }
+        for(int i = 0; i < 4; ++i) {
+            for(int j = 0; j < 4; ++j) {
                 for(int k = 0; k < 4; ++k) {
                     int ii = i + x[k];
                     int jj = j + y[k];

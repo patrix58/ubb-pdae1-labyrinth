@@ -25,8 +25,6 @@ public class GuiPanel extends JPanel {
         super.paintComponent(g);
         if(here) {
             g.drawRect(0, 0, 10, 10);
-        } else {
-            g.drawString("", 0, 0);
         }
     }
 }

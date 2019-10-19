@@ -33,6 +33,10 @@ public class Door implements MapSite {
         }
     }
 
+    public Room getOtherRoom() {
+        return fromRoom == room1 ? room2 : room1;
+    }
+
     public boolean isOpen() {
         return isOpen;
     }
