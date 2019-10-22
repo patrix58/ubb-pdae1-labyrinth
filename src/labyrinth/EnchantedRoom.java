@@ -1,29 +1,27 @@
 package labyrinth;
 
 public class EnchantedRoom extends Room {
-    private boolean key;
-    private Door door;
+    private Door door = null;
 
     @Override
     public void enter() {
         super.enter();
-        if (key) {
-            key = false;
+        if (hasKey()) {
             door.setOpen(true);
+            door = null;
         }
     }
 
     public boolean hasKey() {
-        return key;
+        return door != null;
     }
 
     public void setKey(Door door) {
-        this.key = true;
         this.door = door;
         door.setOpen(false);
     }
 
     public void unsetKey() {
-        key = false;
+        door = null;
     }
 }

@@ -5,17 +5,17 @@ import labyrinth.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Controller<T extends MazeFactory> implements KeyListener {
+public class Controller implements KeyListener {
     private MainGui mainGui;
     private Room currentRoom;
     private GuiPanel currentElement;
     private GuiPanel[] guiElements;
 
-    {
+    public Controller(MazeFactory factory){
         this.currentRoom = Room.rooms.get(0);
         this.guiElements = new GuiPanel[Room.getIdInc()];
         for(int i = 0; i < guiElements.length; ++i) {
-            guiElements[i] = new GuiPanel(T.makePainter(Room.rooms.get(i)));
+            guiElements[i] = new GuiPanel(factory.makePainter(Room.rooms.get(i)));
         }
         this.currentElement = guiElements[currentRoom.getId()];
         mainGui = new MainGui(guiElements);

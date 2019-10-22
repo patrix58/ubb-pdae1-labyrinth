@@ -1,19 +1,19 @@
 package labyrinth;
 
 public class MazeFactory {
-    public static Door makeDoor(Room room1, Room room2) {
+    public Door makeDoor(Room room1, Room room2) {
         return new Door(room1, room2);
     }
 
-    public static Wall makeWall() {
+    public Wall makeWall() {
         return new Wall();
     }
 
-    public static Room makeRoom() {
+    public Room makeRoom() {
         return new Room();
     }
 
-    public static MazePainter makePainter(Room room) {
+    public MazePainter makePainter(Room room) {
         return new MazePainter(room);
     }
 }
